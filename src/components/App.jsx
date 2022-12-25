@@ -28,8 +28,6 @@ export class App extends React.Component {
       this.getImageList();
       this.setState({ page: 1 });
     }
-    const hits = this.state.hits;
-    console.log(hits);
   }
 
   getImageList = async () => {
@@ -83,7 +81,6 @@ export class App extends React.Component {
 
   render() {
     const { hits, isLoading } = this.state;
-    console.log(hits);
     return (
       <div className={style.App}>
         <Searchbar onSubmit={this.onSubmit} />
