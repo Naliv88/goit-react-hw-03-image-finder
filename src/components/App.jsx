@@ -5,6 +5,8 @@ import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery'
 import Modal from './Modal/Modal';
 
+import style from './App.module.css'
+
 export class App extends React.Component {
   state = {
     isLoading: false,
@@ -66,7 +68,7 @@ export class App extends React.Component {
     console.log(this.state.hits);
     console.log(this.state.searchInput);
     return (
-      <div>
+      <div className={style.App}>
         <Searchbar onSubmit={this.onSubmit} />
         {this.state.isLoading && <Watch width="200" color="#4fa94d" />}
         {this.state.hits && <ImageGallery images={this.state.hits} onClick={this.openModal} />}
