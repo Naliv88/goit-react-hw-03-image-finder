@@ -6,7 +6,7 @@ const ImageGallery = ({ images, onClick }) => {
     <ul className="gallery">
           {/* <!-- Набір <li> із зображеннями --> */}
           {images.map(image=>(
-      <ImageGalleryItem key={image.id} smallImage={image.webformatURL} largeImage={image.largeImageURL} onClick={()=>{}}/>))}
+      <ImageGalleryItem key={image.id} smallImage={image.webformatURL} largeImage={image.largeImageURL} onClick={onClick}/>))}
     </ul>
   );
 };
