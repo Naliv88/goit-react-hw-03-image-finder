@@ -18,6 +18,7 @@ export class App extends React.Component {
   };
 
   componentDidMount() {
+    this.getImageList();
   }
 
   componentDidUpdate(prevProps, prevState) { 
@@ -64,16 +65,32 @@ export class App extends React.Component {
     this.setState({ isCreateModalOpen: true });
   };
 
+  loadMore = async () => {
+    this.setState({ isLoading: true });
+    this.setState(prevState => ({ page: prevState.page + 1 }));
+        const searchInput = this.state.searchInput;
+    const page = this.state.page;
+    try {
+      const images = await getData(searchInput, page);
+      console.log(images);
+      this.setState(prevState => ({ hits: [...prevState.hits, ...images] }));
+      // debugger;
+      } catch (error) {
+      console.error(error);
+      } finally {
+      this.setState({ isLoading: false });
+      };
+  };
+
   render() {
     console.log(this.state.hits);
     console.log(this.state.searchInput);
     return (
       <div className={style.App}>
         <Searchbar onSubmit={this.onSubmit} />
-        {this.state.isLoading && <Watch width="200" color="#4fa94d" />}
         {this.state.hits && <ImageGallery images={this.state.hits} onClick={this.openModal} />}
-        React homework template
-        <br />
+        
+       {this.state.isLoading && <Watch width="200" color="#4fa94d" />}
         {this.state.isCreateModalOpen && (
           <Modal largeImage={this.state.modalImage} onClose={this.closeModal} />
         )}
